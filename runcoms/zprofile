@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='vi'
+export VISUAL='vi'
 export PAGER='less'
 
 #
@@ -27,6 +27,7 @@ export PAGER='less'
 
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
+  export LC_ALL='en_US.UTF-8'
 fi
 
 #
@@ -44,6 +45,12 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  ~/bin
+  ~/.nodejs-packages/bin
+  ~/.npm-packages/bin
+  ~/.composer/vendor/bin
+  ~/Library/Android/sdk/tools
+  ~/Library/Android/sdk/platform-tools
   $path
 )
 
@@ -61,3 +68,27 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+# Set defaut Vagrant provider
+export VAGRANT_DEFAULT_PROVIDER=parallels
+
+# GO Path
+export GOPATH=/Users/richard/Library/go
+
+# Load Google Cloud Platform completions
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+
+# Don't add virtualenv name to prompt
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# Setup NVM
+export NVM_DIR="$HOME/.nvm"
+source /usr/local/opt/nvm/nvm.sh
+
+# Set GEM home
+export GEM_HOME="$HOME/.gem"
+
+# pyenv autoload virtualenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
